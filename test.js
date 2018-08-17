@@ -4,7 +4,6 @@ require('mocha');
 const assert = require('assert');
 const AnalogPromise = require('./');
 const PROMISE_STATUS = AnalogPromise.PROMISE_STATUS;
-const STATUS_CAN_CHANGE = AnalogPromise.STATUS_CAN_CHANGE;
 
 var TIME_DELAY = 1000;
 describe('analogPromise',function(){
@@ -19,10 +18,7 @@ describe('analogPromise',function(){
 			done();
 		});
 	});
-	//如果有错误就直接抛异常就好了throw new Error('');
-	//或者再assert断言函数中如果条件是false也是报错
-	//直接运行done()默认就是成功的
-	//如果断言的函数不是异步函数，不需要done时，函数中的参数一定不要传这个参数，不然会导致测试失败
+	
 	it('测试是否会将回掉函数添加到回掉数组中',function(){
 		var analogPromise = new AnalogPromise();
 		analogPromise.then(function(){
@@ -47,18 +43,18 @@ describe('analogPromise',function(){
 
 	it('状态一旦设定是否还会再改变',function(done){
 		var analogPromise = new AnalogPromise();
-		assert(analogPromise._status===0);
+		assert(analogPromise._status===PROMISE_STATUS.INIT);
 		analogPromise.resolve();
-		assert(analogPromise._status===1);
+		assert(analogPromise._status===PROMISE_STATUS.RESOLVE);
 		analogPromise.reject();
-		assert(analogPromise._status===1);
+		assert(analogPromise._status===PROMISE_STATUS.RESOLVE);
 
 		var analogPromise2 = new AnalogPromise();
-		assert(analogPromise2._status===0);
+		assert(analogPromise2._status===PROMISE_STATUS.INIT);
 		analogPromise2.reject();
-		assert(analogPromise2._status===2);
+		assert(analogPromise2._status===PROMISE_STATUS.REJECT);
 		analogPromise.resolve();
-		assert(analogPromise2._status===2);
+		assert(analogPromise2._status===PROMISE_STATUS.REJECT);
 
 		done();
 	});
