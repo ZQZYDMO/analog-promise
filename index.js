@@ -14,11 +14,11 @@
         this._status_can_change = STATUS_CAN_CHANGE.ENABLE;//状态是否可以改变，理论上只允许改变一次
     }
     AnalogPromise.prototype.then = function (cb) {
-        if (this._status == 0) {
+        if (this._status == PROMISE_STATUS.INIT) {
             this._callbackArr.push(cb);
-        } else if (this._status == 1) {
+        } else if (this._status == PROMISE_STATUS.RESOLVE) {
             cb();
-        } else if (this._status == 2) {
+        } else if (this._status == PROMISE_STATUS.REJECT) {
             this._callbackArr = [];
         }
     };
