@@ -4,6 +4,8 @@
 [![NPM monthly downloads](https://img.shields.io/npm/dm/analog-promise.svg?style=flat)](https://npmjs.org/package/analog-promise)
 [![Build Status](https://img.shields.io/travis/jonschlinkert/analog-promise.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/analog-promise)
 
+一个模拟 jQuery promise 的库。
+
 ## 安装
 
 Install with [npm](https://www.npmjs.com/):
@@ -12,7 +14,7 @@ Install with [npm](https://www.npmjs.com/):
 $ npm install analog-promise --save
 ```
 
-## Usage
+## 使用
 ```javascript
 var analogPromise = new AnalogPromise();
 //同意时
